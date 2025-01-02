@@ -3,7 +3,7 @@ import cors from "cors";
 import bodyParser from "body-parser";
 import dotenv from "dotenv";
 import connectDB from "./db/index.js";
-import { getStocks, updateWatchlist } from "./controllers/stock.controller.js";
+import { getStocks, updateWatchlist, getWatchlist, removeFromWatchlist } from "./controllers/stock.controller.js";
 
 dotenv.config({
     path:'./.env',
@@ -21,6 +21,9 @@ connectDB()
 app.get("/api/stocks", getStocks);
 
 app.post("/api/watchlist", updateWatchlist);
+
+app.get("/api/watchlist/fetch",getWatchlist)
+app.post("/api/watchlist/delete",removeFromWatchlist)
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
