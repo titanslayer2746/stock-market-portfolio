@@ -1,9 +1,9 @@
 import express from "express";
-import mongoose from "mongoose";
 import cors from "cors";
 import bodyParser from "body-parser";
 import dotenv from "dotenv";
 import connectDB from "./db/index.js";
+import { getStocks, updateWatchlist } from "./controllers/stock.controller.js";
 
 dotenv.config({
     path:'./.env',
@@ -16,8 +16,11 @@ app.use(cors());
 app.use(bodyParser.json());
 
 //connecting to database
-
 connectDB()
+
+app.get("/api/stocks", getStocks);
+
+app.post("/api/watchlist", updateWatchlist);
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
