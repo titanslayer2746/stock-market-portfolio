@@ -9,14 +9,13 @@ import {
 } from "react-router-dom";
 import "./App.css";
 
-const baseUrl = import.meta.env.MODE==="development" ? "http://localhost:5000/api" : "/api"
 const Stocks = ({ addToWatchlist }) => {
 	const [stocks, setStocks] = useState([]);
 
 
 	useEffect(() => {
 		// Fetch stock data from the backend
-		fetch(baseUrl + "/stocks")
+		fetch("http://localhost:5000/api/stocks")
 			.then((res) => res.json())
 			.then((data) => setStocks(data))
 			.catch((error) => console.error("Error fetching stocks:", error));
@@ -57,7 +56,7 @@ const Watchlist = ({ watchlist }) => {
 	};
 
 	const removeFromWatchlist = (stock) => {
-		fetch(baseUrl + `/watchlist/delete/`,{
+		fetch(`http://localhost:5000/api/watchlist/delete/`,{
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
